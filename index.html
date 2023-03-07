@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.8.1/vue-router.js"></script>
+  <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  <router-link to="/">トップページ</router-link>
+  <router-link to="/fruits">フルーツ一覧ページ</router-link>
+  <router-view></router-view>
+</div>
+
+<script>
+  var router = new VueRouter({
+
+    routes:[
+      {
+        path:'/',
+        component: {
+          template: `
+          <div>
+            <h1>トップページです。</h1>
+          </div>
+          `
+        }
+      },
+      {
+        path: '/fruits',
+        component: {
+          template: `
+          <div>
+            <h1>フルーツ一覧ページです。</h1>
+            <div v-for="fruit in fruits" :key="fruit.id">
+              <h2>{{ fruit.name }}</h2>
+            </div>
+          </div>
+          `,
+          data(){
+            return{
+              fruits:[
+                {
+                id: 1,
+                name: 'りんご'
+                },
+                {
+                  id:2,
+                  name:'みかん'
+                },
+                {
+                  id: 3,
+                  name: 'バナナ'
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  })
+
+  var app = new Vue({
+    router:router
+  }).$mount('#app')
+</script>
+</body>
+</html>
+
